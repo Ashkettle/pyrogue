@@ -8,9 +8,9 @@ TITLE = "PyRogue"
 # size of the map
 MAP_WIDTH = 62
 MAP_HEIGHT = 45
- 
+
 # parameters for dungeon generator
-ROOM_MAX_SIZE = 10 
+ROOM_MAX_SIZE = 10
 ROOM_MIN_SIZE = 6
 MAX_ROOMS = 30
 

@@ -2,8 +2,8 @@
 Main entrypoint for game
 """
 import pygame
-from pygame.locals import *
-import settings
+from pygame.locals import VIDEORESIZE, HWSURFACE, DOUBLEBUF, RESIZABLE
+import game_settings
 from map import Map
 
 
@@ -16,14 +16,14 @@ class Game:
         """
         pygame.init()
         #pygame.mixer.init()  # for sound
-        self.screen = pygame.display.set_mode((settings.WIDTH, settings.HEIGHT))
+        self.screen = pygame.display.set_mode((game_settings.WIDTH, game_settings.HEIGHT))
         self.draw_surface = self.screen.copy()
-        pygame.display.set_caption(settings.TITLE)
-        self.currentWidth = settings.WIDTH
-        self.currentHeight = settings.HEIGHT
+        pygame.display.set_caption(game_settings.TITLE)
+        self.current_width = game_settings.WIDTH
+        self.current_height = game_settings.HEIGHT
 
         self.map = Map()
-        self.map.generate_map(settings.MAP_HEIGHT, settings.MAP_WIDTH)
+        self.map.generate_map(game_settings.MAP_HEIGHT, game_settings.MAP_WIDTH)
 
         self.clock = pygame.time.Clock()
 
@@ -46,18 +46,20 @@ class Game:
                 if event.type == pygame.QUIT:
                     running = False
                 elif event.type == VIDEORESIZE:
-                    self.currentWidth = event.w 
-                    self.currentHeight = event.h
-                    self.screen = pygame.display.set_mode((self.currentWidth, self.currentHeight), HWSURFACE|DOUBLEBUF|RESIZABLE)
+                    self.current_width = event.w
+                    self.current_height = event.h
+                    self.screen = pygame.display.set_mode((self.current_width, self.current_height),
+                                                          HWSURFACE|DOUBLEBUF|RESIZABLE)
             # Update
             self.set_player_movement()
             #keys = pygame.key.get_pressed()
             #if keys[pygame.K_LEFT]:
             #   pass
             # Render
-            self.draw_surface.fill(settings.Colors.BLACK)
+            self.draw_surface.fill(game_settings.Colors.BLACK)
             self.map.render(self.draw_surface)
-            background = pygame.transform.scale(self.draw_surface ,(self.currentWidth, self.currentHeight))
+            background = pygame.transform.scale(self.draw_surface,
+                                                (self.current_width, self.current_height))
             self.screen.blit(background, (0, 0))
 
             pygame.display.update()
