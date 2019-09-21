@@ -3,7 +3,16 @@
 WIDTH = 1024
 HEIGHT = 768
 FPS = 60
-TITLE = "GAME TEMPLATE"
+TITLE = "PyRogue"
+
+# size of the map
+MAP_WIDTH = 80
+MAP_HEIGHT = 65
+ 
+# parameters for dungeon generator
+ROOM_MAX_SIZE = 10 
+ROOM_MIN_SIZE = 6
+MAX_ROOMS = 30
 
 class Colors:
     """ Holds RGB values for basic colors """
